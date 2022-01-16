@@ -2,23 +2,21 @@ import { Request, Response, NextFunction } from 'express'
 
 export const validRegister = async (req: Request, res: Response, next: NextFunction) => {
   const { name, account, password } = req.body
+  const regex=/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{6,20}$/
   const errors=[]
   if(!name){
     errors.push("Hãy nhập tên ")
   }else if(name.length > 20){
     errors.push("Your name is up to 20 character long.")
   }
-
   if(!account){
     errors.push("Please add your email ")
   }else if(!validateEmail(account)){
     errors.push("Email  format is incorrect.")
   }
-  if((!password.match( /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{6,20}$/))){
+  if((!password.match(regex))){
     errors.push('password must have at least 6 character 1 letter ,1 number,1 uppercase and 1 special character')
   }
- 
-
   if(errors.length > 0) return res.status(400).json({msg: errors})
 
   next();

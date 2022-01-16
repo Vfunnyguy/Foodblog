@@ -190,7 +190,7 @@ const loginUser = async (user: IUser, password: string, res: Response) => {
   });
 
   res.json({
-    msg: "Login Success!",
+    msg: "Đăng nhập thành công!",
     access_token,
     user: { ...user._doc, password: "" },
   });
@@ -205,7 +205,7 @@ const registerUser = async (user: IUserParams, res: Response) => {
   await newUser.save();
 
   res.json({
-    msg: "Login Success!",
+    msg: "Đăng nhập thành công!",
     access_token,
     user: { ...newUser._doc, password: "" },
   });
