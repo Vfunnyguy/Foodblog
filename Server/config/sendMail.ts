@@ -1,4 +1,4 @@
-const nodemailer = require("nodemailer");
+import nodemailer from "nodemailer";
 const sendMail = async (to: string, url: string, txt: string) => {
   try {
     const tranport = nodemailer.createTransport({
